@@ -7,61 +7,93 @@
 
 <title>Something For You ❤️</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
 <style>
 
 body{
 margin:0;
-background:black;
-font-family:Arial;
-color:white;
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#000000,#1a0015);
+height:100vh;
 overflow:hidden;
+color:white;
 }
 
-.screen{
+/* CENTER CONTAINER */
+
+.container{
 position:absolute;
 top:50%;
 left:50%;
-transform:translate(-50%,-50%) scale(.9);
-opacity:0;
-pointer-events:none;
-transition:0.5s;
-text-align:center;
+transform:translate(-50%,-50%);
 width:90%;
-max-width:600px;
+max-width:450px;
+}
+
+/* GLASS CARD */
+
+.card{
+backdrop-filter:blur(20px);
+background:rgba(255,255,255,0.05);
+border-radius:20px;
+padding:40px;
+text-align:center;
+box-shadow:0 0 40px rgba(255,0,120,0.3);
+}
+
+/* SCREENS */
+
+.screen{
+opacity:0;
+transform:scale(.85);
+pointer-events:none;
+position:absolute;
+width:100%;
+transition:0.6s ease;
 }
 
 .active{
 opacity:1;
-transform:translate(-50%,-50%) scale(1);
+transform:scale(1);
 pointer-events:auto;
 }
 
+/* BUTTONS */
+
 .btn{
-padding:14px 30px;
+padding:14px 28px;
+border-radius:30px;
 border:none;
-border-radius:40px;
 margin:10px;
-font-size:18px;
+font-size:16px;
 cursor:pointer;
+transition:.3s;
 }
 
 .yes{
 background:#ff007f;
 color:white;
-box-shadow:0 0 15px #ff007f;
+box-shadow:0 0 20px #ff007f;
+}
+
+.yes:hover{
+transform:scale(1.1);
 }
 
 .no{
-background:#333;
+background:#222;
 color:white;
 position:absolute;
 }
+
+/* TYPEWRITER */
 
 .typewriter{
 overflow:hidden;
 white-space:nowrap;
 border-right:3px solid white;
-animation:typing 4s steps(40), blink .5s infinite alternate;
+animation:typing 3s steps(40), blink .5s infinite alternate;
 }
 
 @keyframes typing{
@@ -73,14 +105,17 @@ to{width:100%}
 50%{border-color:transparent}
 }
 
+/* FLOATING HEARTS */
+
 .heart{
 position:fixed;
-animation:fall linear forwards;
+animation:floatUp linear forwards;
 }
 
-@keyframes fall{
-0%{transform:translateY(-10vh);opacity:1}
-100%{transform:translateY(110vh);opacity:0}
+@keyframes floatUp{
+0%{transform:translateY(100vh);opacity:0}
+30%{opacity:1}
+100%{transform:translateY(-10vh);opacity:0}
 }
 
 </style>
@@ -89,104 +124,82 @@ animation:fall linear forwards;
 
 <body>
 
-<!-- 1 -->
+<div class="container">
+<div class="card">
+
+<!-- SCREEN 1 -->
 
 <div class="screen active" id="screen1">
 
-<h1>Do you like surprises? ❤️</h1>
+<h2>Do you like surprises? ❤️</h2>
 
-<button class="btn yes" onclick="nextScreen(2)">Yes 💕</button>
-
+<button class="btn yes" onclick="next(2)">Yes 💕</button>
 <button class="btn no" id="noBtn">No 😅</button>
 
 </div>
 
-<!-- 2 -->
+<!-- SCREEN 2 -->
 
 <div class="screen" id="screen2">
 
-<h2>Are you sure? 👀</h2>
+<h2 class="typewriter">I made something special...</h2>
 
-<button class="btn yes" onclick="nextScreen(3)">Yes →</button>
+<br>
+
+<button class="btn yes" onclick="next(3)">Continue →</button>
 
 </div>
 
-<!-- 3 -->
+<!-- SCREEN 3 -->
 
 <div class="screen" id="screen3">
 
-<h2>One more step...</h2>
+<p>
+Some people walk into your life...<br>
+and everything changes ❤️
+</p>
 
-<button class="btn yes" onclick="nextScreen(4)">Continue →</button>
+<button class="btn yes" onclick="next(4)">Next →</button>
 
 </div>
 
-<!-- 4 -->
+<!-- SCREEN 4 -->
 
 <div class="screen" id="screen4">
 
-<h1 class="typewriter">I made something just for you...</h1>
-
-<button class="btn yes" onclick="nextScreen(5)">Next →</button>
+<h2>You are my favourite surprise ❤️</h2>
 
 </div>
 
-<!-- 5 -->
-
-<div class="screen" id="screen5">
-
-<p>You changed my world in the best way ❤️</p>
-
-<button class="btn yes" onclick="nextScreen(6)">Continue →</button>
-
 </div>
-
-<!-- 6 -->
-
-<div class="screen" id="screen6">
-
-<p>Every memory with you feels special.</p>
-
-<button class="btn yes" onclick="nextScreen(7)">Next →</button>
-
-</div>
-
-<!-- 7 -->
-
-<div class="screen" id="screen7">
-
-<h1>You are my favourite surprise ❤️</h1>
-
-<button class="btn yes" onclick="nextScreen(8)">Final →</button>
-
-</div>
-
-<!-- 8 -->
-
-<div class="screen" id="screen8">
-
-<h2>Thank you for being you ❤️</h2>
-
 </div>
 
 <script>
 
-function nextScreen(n){
+/* PAGE TRANSITION */
 
-document.querySelectorAll(".screen").forEach(s=>{
-s.classList.remove("active");
-});
+function next(n){
 
-document.getElementById("screen"+n).classList.add("active");
+document.querySelectorAll(".screen")
+.forEach(s=>s.classList.remove("active"));
+
+document.getElementById("screen"+n)
+.classList.add("active");
 
 }
 
-const noBtn=document.getElementById("noBtn");
+/* RUNNING NO BUTTON */
 
-noBtn.addEventListener("mouseover",()=>{
-noBtn.style.top=Math.random()*80+"%";
-noBtn.style.left=Math.random()*80+"%";
+const no=document.getElementById("noBtn");
+
+no.addEventListener("mouseover",()=>{
+
+no.style.top=Math.random()*80+"%";
+no.style.left=Math.random()*80+"%";
+
 });
+
+/* FLOATING HEARTS */
 
 setInterval(()=>{
 
@@ -196,14 +209,14 @@ heart.className="heart";
 heart.innerHTML="❤️";
 
 heart.style.left=Math.random()*100+"%";
-heart.style.fontSize=(10+Math.random()*30)+"px";
-heart.style.animationDuration=(3+Math.random()*5)+"s";
+heart.style.fontSize=(12+Math.random()*20)+"px";
+heart.style.animationDuration=(4+Math.random()*4)+"s";
 
 document.body.appendChild(heart);
 
 setTimeout(()=>heart.remove(),8000);
 
-},250);
+},300);
 
 </script>
 
