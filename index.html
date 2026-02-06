@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Something For You ❤️</title>
 
@@ -17,15 +17,13 @@ color:white;
 overflow:hidden;
 }
 
-/* ---------- SCREEN SYSTEM ---------- */
-
 .screen{
 position:absolute;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%) scale(.9);
 opacity:0;
-pointer-events:none; /* IMPORTANT FIX */
+pointer-events:none;
 transition:0.5s;
 text-align:center;
 width:90%;
@@ -35,10 +33,8 @@ max-width:600px;
 .active{
 opacity:1;
 transform:translate(-50%,-50%) scale(1);
-pointer-events:auto; /* ONLY active clickable */
+pointer-events:auto;
 }
-
-/* ---------- BUTTONS ---------- */
 
 .btn{
 padding:14px 30px;
@@ -61,8 +57,6 @@ color:white;
 position:absolute;
 }
 
-/* ---------- TYPEWRITER ---------- */
-
 .typewriter{
 overflow:hidden;
 white-space:nowrap;
@@ -78,8 +72,6 @@ to{width:100%}
 @keyframes blink{
 50%{border-color:transparent}
 }
-
-/* ---------- HEARTS ---------- */
 
 .heart{
 position:fixed;
@@ -97,7 +89,7 @@ animation:fall linear forwards;
 
 <body>
 
-<!-- SCREEN 1 -->
+<!-- 1 -->
 
 <div class="screen active" id="screen1">
 
@@ -109,78 +101,57 @@ animation:fall linear forwards;
 
 </div>
 
-<!-- SCREEN 2 -->
+<!-- 2 -->
 
 <div class="screen" id="screen2">
 
-<h1 class="typewriter">I made something just for you...</h1>
+<h2>Are you sure? 👀</h2>
 
-<br><br>
-
-<button class="btn yes" onclick="nextScreen(3)">Continue →</button>
+<button class="btn yes" onclick="nextScreen(3)">Yes →</button>
 
 </div>
 
-<!-- SCREEN 3 -->
+<!-- 3 -->
 
 <div class="screen" id="screen3">
 
-<p>
+<h2>One more step...</h2>
 
-Some people enter our life quietly...<br>
-and suddenly everything feels different ❤️
-
-</p>
-
-<button class="btn yes" onclick="nextScreen(4)">Final Message →</button>
+<button class="btn yes" onclick="nextScreen(4)">Continue →</button>
 
 </div>
 
-<!-- SCREEN 4 -->
+<!-- 4 -->
 
 <div class="screen" id="screen4">
 
-<p>
+<h1 class="typewriter">I made something just for you...</h1>
 
-Every moment with you feels special.<br><br>
-
-And I hope this little surprise made you smile ❤️
-
-</p>
+<button class="btn yes" onclick="nextScreen(5)">Next →</button>
 
 </div>
 
-  <!-- SCREEN 5 -->
+<!-- 5 -->
 
 <div class="screen" id="screen5">
 
-<h2>Before we continue...</h2>
+<p>You changed my world in the best way ❤️</p>
 
-<p>I just want you to know something ❤️</p>
-
-<button class="btn yes" onclick="nextScreen(6)">Next →</button>
+<button class="btn yes" onclick="nextScreen(6)">Continue →</button>
 
 </div>
 
-
-<!-- SCREEN 6 -->
+<!-- 6 -->
 
 <div class="screen" id="screen6">
 
-<p>
+<p>Every memory with you feels special.</p>
 
-You made ordinary moments feel magical.<br><br>
-
-And every memory with you feels special.
-
-</p>
-
-<button class="btn yes" onclick="nextScreen(7)">Continue →</button>
+<button class="btn yes" onclick="nextScreen(7)">Next →</button>
 
 </div>
 
-
-<!-- SCREEN 7 -->
+<!-- 7 -->
 
 <div class="screen" id="screen7">
 
@@ -190,8 +161,7 @@ And every memory with you feels special.
 
 </div>
 
-
-<!-- SCREEN 8 -->
+<!-- 8 -->
 
 <div class="screen" id="screen8">
 
@@ -201,32 +171,22 @@ And every memory with you feels special.
 
 <script>
 
-/* SCREEN SWITCH */
-
 function nextScreen(n){
 
 document.querySelectorAll(".screen").forEach(s=>{
-
 s.classList.remove("active");
-
 });
 
 document.getElementById("screen"+n).classList.add("active");
 
 }
 
-/* RUNNING NO BUTTON */
-
 const noBtn=document.getElementById("noBtn");
 
 noBtn.addEventListener("mouseover",()=>{
-
 noBtn.style.top=Math.random()*80+"%";
 noBtn.style.left=Math.random()*80+"%";
-
 });
-
-/* HEART ANIMATION */
 
 setInterval(()=>{
 
